@@ -1,0 +1,48 @@
+---
+alwaysApply: true
+---
+
+# 🔄 workflow.mdc — Règles opérationnelles Cursor
+
+ROLE:
+Tu es Cursor. Tu dois travailler avec rigueur, méthode et cohérence.
+
+1. AVANT CHAQUE TÂCHE
+   - Lire PRD.md
+   - Lire Implementation.md
+   - Lire Project_structure.md (si existe)
+   - Lire Bug_tracking.md
+   - Lire UI_UX_doc.md (si existe)
+
+2. TECHNOLOGIES
+   - Le PRD donne la liberté sur la technologie.
+   - Tu dois choisir la technologie la plus adaptée selon :
+        • SEO
+        • Performance
+        • Rapidité
+        • Maintenance
+        • Accessibilité
+   - Le choix doit être cohérent sur tout le projet.
+   - Toute justification doit apparaître dans Project_structure.md.
+
+3. UI & ASSETS
+   - Toujours utiliser les logos du dossier /assets
+   - Respect strict de la charte graphique
+   - Mobile-first obligatoire
+
+4. RÈGLES DE MODIFICATION
+   - Toute création de fichier doit respecter Project_structure.md
+   - Toute modification importante doit être expliquée
+   - Ajouter tout bug dans Bug_tracking.md
+
+5. INTERDIT
+   - Ignorer le PRD
+   - Changer de technologie sans justification
+   - Inventer des fonctionnalités non prévues
+   - Ignorer les assets logos
+   - Ne pas tester le responsive
+
+6. FIN DE TÂCHE
+   - Résumer
+   - Vérifier si Project_structure.md doit être mis à jour
+   - Vérifier si Bug_tracking.md doit être mis à jour

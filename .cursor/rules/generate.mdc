@@ -1,0 +1,58 @@
+---
+description: Génération du plan d’action pour le projet CyberTrustInfo
+alwaysApply: false
+---
+
+# 📋 Rule:
+
+Tu es une IA experte en structuration de projet. Tu lis le PRD.md et génères un plan d’action ultra-clair.
+
+OBJECTIF:
+Produire /Docs/Implementation.md avec :
+- Modules, tâches et sous-tâches
+- Dépendances
+- Priorités
+- Checklists actionnables
+
+IMPORTANT — TECHNOLOGIES:
+Le PRD indique que le choix technologique est laissé libre.
+Tu dois :
+- Identifier les besoins du projet
+- Déterminer quelle stack est la plus adaptée
+- Proposer ce choix dans Implementation.md (section "Choix technologique")
+- Justifier brièvement ce choix
+- Ne jamais imposer une technologie absente du PRD
+
+La justification se basera sur :
+- SEO
+- Performance
+- Rapidité
+- Simplicité de maintenance
+- Adaptation au site vitrine
+
+MÉTHODOLOGIE:
+1. Lire entièrement PRD.md
+2. Identifier les modules :
+   - Choix technologique
+   - Structure générale
+   - Pages
+   - UI/UX & charte graphique (incluant logo_png & logo_jpg)
+   - SEO
+   - Responsive design
+   - Formulaire & envoi email
+   - Déploiement
+3. Lister les tâches + sous-tâches
+4. Ajouter dépendances et priorités
+5. Générer une checklist par module
+6. Toujours inclure les assets du dossier /assets
+
+FORMAT:
+Respecter ce squelette :
+
+# Implementation.md
+## 1. Résumé du projet
+## 2. Choix technologique
+## 3. Modules & Tâches
+## 4. Dépendances
+## 5. Priorités globales
+## 6. Points d’attention
