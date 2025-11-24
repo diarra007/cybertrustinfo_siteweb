@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://cybertrustinfo.vercel.app"; // Remplacez par votre domaine final
+  const baseUrl = "https://cybertrustinfo.com";
 
   return [
     {

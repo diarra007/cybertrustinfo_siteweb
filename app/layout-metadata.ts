@@ -7,7 +7,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://cybertrustinfo.vercel.app"), // Remplacez par votre domaine Vercel ou personnalisé
+  metadataBase: new URL("https://cybertrustinfo.com"),
   title: {
     default: "CyberTrustInfo Consulting - Expert en Cybersécurité TPE/PME",
     template: "%s | CyberTrustInfo Consulting",
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "fr_FR",
-    url: "https://cybertrustinfo.vercel.app",
+    url: "https://cybertrustinfo.com",
     siteName: "CyberTrustInfo Consulting",
     title: "CyberTrustInfo Consulting - Protégez votre activité",
     description: "Expertise en cybersécurité accessible pour TPE, PME et indépendants.",
@@ -42,4 +42,16 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  icons: {
+    icon: [
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon.ico", sizes: "any" },
+    ],
+    apple: [
+      { url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    shortcut: "/favicon.ico",
+  },
+  manifest: "/site.webmanifest",
 };

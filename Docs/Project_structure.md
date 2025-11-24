@@ -37,7 +37,14 @@
 ├── lib/                    # Utilitaires
 │   └── utils.ts            # Helpers (cn, etc.)
 ├── public/                 # Fichiers statiques
-│   └── assets/             # Logos (logo_png.png, logo_jpg.jpg)
+│   ├── assets/             # Logos (logo_png.png, logo_jpg.jpg)
+│   ├── favicon.ico         # Favicon principal
+│   ├── favicon-16x16.png   # Favicon 16x16
+│   ├── favicon-32x32.png   # Favicon 32x32
+│   ├── apple-touch-icon.png # Apple Touch Icon
+│   ├── android-chrome-192x192.png # Android icon 192x192
+│   ├── android-chrome-512x512.png # Android icon 512x512
+│   └── site.webmanifest    # Web App Manifest
 ├── Docs/                   # Documentation du projet
 ├── .eslintrc.json          # Configuration Linter
 ├── next.config.ts          # Configuration Next.js

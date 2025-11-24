@@ -39,18 +39,34 @@ export async function POST(request: Request) {
 
     // 3. Envoi réel avec Resend
     const resend = new Resend(process.env.RESEND_API_KEY);
+    
+    // Utiliser le domaine vérifié si disponible, sinon le domaine de test Resend
+    const fromEmail = process.env.RESEND_FROM_EMAIL || "CyberTrustInfo Contact <onboarding@resend.dev>";
+    
     const data = await resend.emails.send({
-      from: "CyberTrustInfo Contact <onboarding@resend.dev>", // Utiliser un domaine vérifié en prod
+      from: fromEmail,
       to: ["contact@cybertrustinfo.com"], // Email de destination
       replyTo: email,
       subject: `[Contact Site] ${subject}`,
       html: `
-        <h1>Nouveau message de ${name}</h1>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Sujet:</strong> ${subject}</p>
-        <hr />
-        <p><strong>Message:</strong></p>
-        <p style="white-space: pre-wrap;">${message}</p>
+        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+          <h1 style="color: #0F172A; border-bottom: 3px solid #3B82F6; padding-bottom: 10px;">
+            Nouveau message de contact
+          </h1>
+          <div style="background: #F8FAFC; padding: 15px; border-radius: 8px; margin: 20px 0;">
+            <p style="margin: 5px 0;"><strong>Nom:</strong> ${name}</p>
+            <p style="margin: 5px 0;"><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+            <p style="margin: 5px 0;"><strong>Sujet:</strong> ${subject}</p>
+          </div>
+          <div style="margin: 20px 0;">
+            <h2 style="color: #1E293B; font-size: 18px;">Message:</h2>
+            <p style="white-space: pre-wrap; line-height: 1.6; color: #334155;">${message}</p>
+          </div>
+          <hr style="border: none; border-top: 1px solid #E2E8F0; margin: 30px 0;" />
+          <p style="color: #64748B; font-size: 12px;">
+            Ce message a été envoyé depuis le formulaire de contact du site CyberTrustInfo Consulting.
+          </p>
+        </div>
       `,
     });
 

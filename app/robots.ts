@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: ["/api/", "/admin/"],
     },
-    sitemap: "https://cybertrustinfo.vercel.app/sitemap.xml", // Remplacez par votre domaine final
+    sitemap: "https://cybertrustinfo.com/sitemap.xml",
   };
 }
 
