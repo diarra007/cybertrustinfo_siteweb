@@ -87,7 +87,7 @@ export const ContactForm = () => {
             {...register("name")}
             type="text"
             id="name"
-            className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+            className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 bg-white placeholder:text-slate-400"
             placeholder="Jean Dupont"
           />
           {errors.name && <p className="mt-1 text-sm text-red-500">{errors.name.message}</p>}
@@ -102,7 +102,7 @@ export const ContactForm = () => {
             {...register("email")}
             type="email"
             id="email"
-            className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
+            className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all text-slate-900 bg-white placeholder:text-slate-400"
             placeholder="jean.dupont@entreprise.com"
           />
           {errors.email && <p className="mt-1 text-sm text-red-500">{errors.email.message}</p>}
@@ -116,7 +116,7 @@ export const ContactForm = () => {
           <select
              {...register("subject")}
              id="subject"
-             className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all bg-white"
+             className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all bg-white text-slate-900"
           >
             <option value="">Sélectionnez un sujet</option>
             <option value="Audit">Demande d'audit</option>
@@ -137,7 +137,7 @@ export const ContactForm = () => {
             {...register("message")}
             id="message"
             rows={5}
-            className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none"
+            className="w-full px-4 py-2 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all resize-none text-slate-900 bg-white placeholder:text-slate-400"
             placeholder="Détaillez votre besoin..."
           />
           {errors.message && <p className="mt-1 text-sm text-red-500">{errors.message.message}</p>}
