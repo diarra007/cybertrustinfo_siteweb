@@ -28,18 +28,42 @@ export async function POST(request: Request) {
 
     const { name, email, subject, message } = result.data;
 
-    // 2. Simulation d'envoi si pas de clé API (pour éviter crash en dév sans env)
-    if (!process.env.RESEND_API_KEY) {
-      console.log("⚠️ RESEND_API_KEY manquante. Simulation d'envoi :");
-      console.log({ name, email, subject, message });
-      // Simule un délai réseau
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      return NextResponse.json({ success: true, message: "Email simulé (Clé API manquante)" });
+    // 2. Vérification de la clé API avec diagnostic
+    const apiKey = process.env.RESEND_API_KEY;
+    
+    // Diagnostic pour comprendre pourquoi la clé n'est pas accessible
+    if (!apiKey) {
+      console.error("❌ RESEND_API_KEY manquante. Impossible d'envoyer l'email.");
+      console.error("🔍 Diagnostic:");
+      console.error("  - process.env.RESEND_API_KEY:", apiKey);
+      console.error("  - Toutes les variables RESEND_*:", Object.keys(process.env).filter(k => k.startsWith('RESEND')));
+      console.error("  - NODE_ENV:", process.env.NODE_ENV);
+      console.log("Données du formulaire:", { name, email, subject, message });
+      return NextResponse.json(
+        { 
+          error: "Configuration manquante",
+          message: "La clé API Resend n'est pas accessible au runtime. Vérifiez que la variable est configurée dans Vercel et que le projet a été redéployé.",
+          simulated: true
+        },
+        { status: 500 }
+      );
+    }
+
+    // Vérifier que la clé a le bon format
+    if (!apiKey.startsWith('re_')) {
+      console.error("⚠️ Format de clé API invalide. La clé doit commencer par 're_'");
+      return NextResponse.json(
+        {
+          error: "Configuration invalide",
+          message: "Le format de la clé API Resend est invalide."
+        },
+        { status: 500 }
+      );
     }
 
     // 3. Envoi réel avec Resend
     try {
-      const resend = new Resend(process.env.RESEND_API_KEY);
+      const resend = new Resend(apiKey);
       
       // Utiliser le domaine vérifié si disponible, sinon le domaine de test Resend
       const fromEmail = process.env.RESEND_FROM_EMAIL || "CyberTrustInfo Contact <onboarding@resend.dev>";

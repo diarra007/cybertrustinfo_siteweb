@@ -47,14 +47,20 @@ export const ContactForm = () => {
 
       if (!response.ok) {
         console.error("Erreur API:", result);
-        throw new Error(result.error || "Erreur lors de l'envoi");
+        // Si c'est une simulation, afficher un message spécial
+        if (result.simulated) {
+          setSubmitStatus("error");
+          // Afficher un message d'erreur plus explicite
+          return;
+        }
+        throw new Error(result.error || result.message || "Erreur lors de l'envoi");
       }
 
       if (result.success) {
         setSubmitStatus("success");
         reset();
       } else {
-        throw new Error(result.error || "Erreur lors de l'envoi");
+        throw new Error(result.error || result.message || "Erreur lors de l'envoi");
       }
     } catch (error: any) {
       console.error("Erreur formulaire:", error);
@@ -78,11 +84,21 @@ export const ContactForm = () => {
       )}
 
       {submitStatus === "error" && (
-        <div className="mb-6 p-4 bg-red-50 text-red-700 rounded-lg border border-red-100 flex items-center gap-3">
-           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          <p>Une erreur est survenue. Merci de réessayer ou de nous contacter par email.</p>
+        <div className="mb-6 p-4 bg-red-50 text-red-700 rounded-lg border border-red-100">
+          <div className="flex items-center gap-3 mb-2">
+            <svg className="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <p className="font-semibold">Erreur lors de l'envoi</p>
+          </div>
+          <p className="text-sm mt-2">
+            Le formulaire n'a pas pu être envoyé. Veuillez nous contacter directement à{" "}
+            <a href="mailto:contact@cybertrustinfo.com" className="underline font-medium">contact@cybertrustinfo.com</a>
+            {" "}ou réessayer plus tard.
+          </p>
+          <p className="text-xs mt-3 text-red-600 italic">
+            Note : Si vous êtes l'administrateur, vérifiez que la clé API Resend est configurée dans Vercel.
+          </p>
         </div>
       )}
 
