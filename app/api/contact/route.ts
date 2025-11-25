@@ -65,8 +65,8 @@ export async function POST(request: Request) {
     try {
       const resend = new Resend(apiKey);
       
-      // Utiliser le domaine vérifié si disponible, sinon le domaine de test Resend
-      const fromEmail = process.env.RESEND_FROM_EMAIL || "CyberTrustInfo Contact <onboarding@resend.dev>";
+      // Utiliser le domaine vérifié (cybertrustinfo.com est vérifié dans Resend)
+      const fromEmail = process.env.RESEND_FROM_EMAIL || "CyberTrustInfo Contact <contact@cybertrustinfo.com>";
       
       const data = await resend.emails.send({
         from: fromEmail,
@@ -97,10 +97,24 @@ export async function POST(request: Request) {
 
       if (data.error) {
         console.error("❌ Erreur Resend:", JSON.stringify(data.error, null, 2));
+        
+        // Gestion spécifique de l'erreur de domaine de test
+        const errorMessage = data.error.message || "";
+        if (errorMessage.includes("testing emails") || errorMessage.includes("your own email")) {
+          return NextResponse.json(
+            { 
+              error: "Configuration Resend requise",
+              message: "Le domaine cybertrustinfo.com doit être vérifié dans Resend pour envoyer des emails. En attendant, contactez-nous directement à contact@cybertrustinfo.com",
+              details: "Avec le domaine de test onboarding@resend.dev, vous ne pouvez envoyer qu'à votre propre email. Vérifiez votre domaine dans Resend pour utiliser contact@cybertrustinfo.com comme expéditeur."
+            },
+            { status: 500 }
+          );
+        }
+        
         return NextResponse.json(
           { 
             error: "Erreur lors de l'envoi de l'email",
-            details: data.error.message || "Vérifiez votre configuration Resend"
+            details: errorMessage || "Vérifiez votre configuration Resend"
           },
           { status: 500 }
         );

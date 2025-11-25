@@ -96,9 +96,13 @@ export const ContactForm = () => {
             <a href="mailto:contact@cybertrustinfo.com" className="underline font-medium">contact@cybertrustinfo.com</a>
             {" "}ou réessayer plus tard.
           </p>
-          <p className="text-xs mt-3 text-red-600 italic">
-            Note : Si vous êtes l'administrateur, vérifiez que la clé API Resend est configurée dans Vercel.
-          </p>
+          <div className="mt-3 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+            <p className="text-xs text-yellow-800 font-semibold mb-1">ℹ️ Information importante :</p>
+            <p className="text-xs text-yellow-700">
+              Pour que le formulaire fonctionne, le domaine <strong>cybertrustinfo.com</strong> doit être vérifié dans Resend. 
+              En attendant, contactez-nous directement par email.
+            </p>
+          </div>
         </div>
       )}
 
