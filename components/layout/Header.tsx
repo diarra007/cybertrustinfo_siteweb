@@ -40,7 +40,7 @@ export const Header = () => {
           {/* Logo */}
           <div className="flex-shrink-0 flex items-center">
             <Link href="/" className="transform hover:scale-105 transition-transform duration-300">
-              <div className="relative h-12 w-48">
+              <div className="relative h-16 w-56">
                 <Image
                   src="/assets/logo_png.png"
                   alt="CyberTrustInfo Logo"

@@ -29,8 +29,8 @@ export default function ContactPage() {
         </svg>
       ),
       title: "Zone d'intervention",
-      value: "Paris & Île-de-France",
-      description: "Intervention à distance partout en France",
+      value: "France",
+      description: "5 Rue du Moulinas - 66330 CABESTANY. Intervention à distance partout en France",
       color: "from-purple-500 to-pink-500",
       bgColor: "bg-purple-50",
     },

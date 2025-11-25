@@ -21,15 +21,15 @@ export default function LegalPage() {
             <strong>Mamadou COULIBALY MALLE</strong><br/>
             Consultant indépendant en cybersécurité<br/>
             Email : contact@cybertrustinfo.com<br/>
-            [Adresse postale à compléter]<br/>
+            Adresse : 5 Rue du Moulinas - 66330 CABESTANY, France<br/>
             [SIRET à compléter]
           </p>
 
           <h3>2. Hébergement</h3>
           <p>
             Ce site est hébergé par :<br/>
-            [Nom de l'hébergeur, ex: Vercel Inc.]<br/>
-            [Adresse de l'hébergeur]
+            Vercel Inc.<br/>
+            340 S Lemon Ave #4133, Walnut, CA 91789, États-Unis
           </p>
 
           <h3>3. Propriété intellectuelle</h3>

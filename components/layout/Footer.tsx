@@ -104,7 +104,11 @@ export const Footer = () => {
                 </div>
                 <div>
                   <div className="text-white font-medium mb-1">Localisation</div>
-                  <span>Paris & Île-de-France</span>
+                  <div className="text-sm leading-relaxed">
+                    <div>5 Rue du Moulinas</div>
+                    <div>66330 CABESTANY</div>
+                    <div>France</div>
+                  </div>
                 </div>
               </li>
             </ul>
