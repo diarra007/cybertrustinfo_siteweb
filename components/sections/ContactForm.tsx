@@ -43,12 +43,21 @@ export const ContactForm = () => {
         body: JSON.stringify(data),
       });
 
-      if (!response.ok) throw new Error("Erreur lors de l'envoi");
+      const result = await response.json();
 
-      setSubmitStatus("success");
-      reset();
-    } catch (error) {
-      console.error(error);
+      if (!response.ok) {
+        console.error("Erreur API:", result);
+        throw new Error(result.error || "Erreur lors de l'envoi");
+      }
+
+      if (result.success) {
+        setSubmitStatus("success");
+        reset();
+      } else {
+        throw new Error(result.error || "Erreur lors de l'envoi");
+      }
+    } catch (error: any) {
+      console.error("Erreur formulaire:", error);
       setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);

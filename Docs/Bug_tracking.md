@@ -10,6 +10,7 @@ Ce document recense les problèmes connus, les bugs rencontrés et les tâches d
 | FEAT-001 | 2025-01-23 | Logo navbar agrandi | Résolu | P2 | - | Logo agrandi de h-12 w-48 à h-16 w-56 sans modifier la hauteur de la navbar |
 | UPDATE-001 | 2025-01-23 | Mise à jour zone d'intervention et adresse | Résolu | P1 | - | Zone d'intervention changée en "France", adresse mise à jour : 5 Rue du Moulinas - 66330 CABESTANY |
 | BUG-004 | 2025-01-23 | Texte invisible dans les champs du formulaire de contact | Résolu | P0 | - | Ajout de text-slate-900 et bg-white sur tous les champs input, textarea et select pour rendre le texte visible |
+| BUG-005 | 2025-01-23 | Erreur lors de l'envoi du formulaire de contact | En cours | P0 | - | Amélioration de la gestion d'erreur pour identifier la cause (probablement clé API Resend manquante ou invalide) |
 
 *Statuts possibles :* `Nouveau`, `En cours`, `Résolu`, `Fermé`
 *Priorités :* `P0` (Critique), `P1` (Important), `P2` (Mineur)

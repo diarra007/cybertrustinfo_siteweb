@@ -38,44 +38,62 @@ export async function POST(request: Request) {
     }
 
     // 3. Envoi réel avec Resend
-    const resend = new Resend(process.env.RESEND_API_KEY);
-    
-    // Utiliser le domaine vérifié si disponible, sinon le domaine de test Resend
-    const fromEmail = process.env.RESEND_FROM_EMAIL || "CyberTrustInfo Contact <onboarding@resend.dev>";
-    
-    const data = await resend.emails.send({
-      from: fromEmail,
-      to: ["contact@cybertrustinfo.com"], // Email de destination
-      replyTo: email,
-      subject: `[Contact Site] ${subject}`,
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-          <h1 style="color: #0F172A; border-bottom: 3px solid #3B82F6; padding-bottom: 10px;">
-            Nouveau message de contact
-          </h1>
-          <div style="background: #F8FAFC; padding: 15px; border-radius: 8px; margin: 20px 0;">
-            <p style="margin: 5px 0;"><strong>Nom:</strong> ${name}</p>
-            <p style="margin: 5px 0;"><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
-            <p style="margin: 5px 0;"><strong>Sujet:</strong> ${subject}</p>
+    try {
+      const resend = new Resend(process.env.RESEND_API_KEY);
+      
+      // Utiliser le domaine vérifié si disponible, sinon le domaine de test Resend
+      const fromEmail = process.env.RESEND_FROM_EMAIL || "CyberTrustInfo Contact <onboarding@resend.dev>";
+      
+      const data = await resend.emails.send({
+        from: fromEmail,
+        to: ["contact@cybertrustinfo.com"], // Email de destination
+        replyTo: email,
+        subject: `[Contact Site] ${subject}`,
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
+            <h1 style="color: #0F172A; border-bottom: 3px solid #3B82F6; padding-bottom: 10px;">
+              Nouveau message de contact
+            </h1>
+            <div style="background: #F8FAFC; padding: 15px; border-radius: 8px; margin: 20px 0;">
+              <p style="margin: 5px 0;"><strong>Nom:</strong> ${name}</p>
+              <p style="margin: 5px 0;"><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+              <p style="margin: 5px 0;"><strong>Sujet:</strong> ${subject}</p>
+            </div>
+            <div style="margin: 20px 0;">
+              <h2 style="color: #1E293B; font-size: 18px;">Message:</h2>
+              <p style="white-space: pre-wrap; line-height: 1.6; color: #334155;">${message}</p>
+            </div>
+            <hr style="border: none; border-top: 1px solid #E2E8F0; margin: 30px 0;" />
+            <p style="color: #64748B; font-size: 12px;">
+              Ce message a été envoyé depuis le formulaire de contact du site CyberTrustInfo Consulting.
+            </p>
           </div>
-          <div style="margin: 20px 0;">
-            <h2 style="color: #1E293B; font-size: 18px;">Message:</h2>
-            <p style="white-space: pre-wrap; line-height: 1.6; color: #334155;">${message}</p>
-          </div>
-          <hr style="border: none; border-top: 1px solid #E2E8F0; margin: 30px 0;" />
-          <p style="color: #64748B; font-size: 12px;">
-            Ce message a été envoyé depuis le formulaire de contact du site CyberTrustInfo Consulting.
-          </p>
-        </div>
-      `,
-    });
+        `,
+      });
 
-    if (data.error) {
-        console.error("Erreur Resend:", data.error);
-        return NextResponse.json({ error: "Erreur lors de l'envoi de l'email" }, { status: 500 });
+      if (data.error) {
+        console.error("❌ Erreur Resend:", JSON.stringify(data.error, null, 2));
+        return NextResponse.json(
+          { 
+            error: "Erreur lors de l'envoi de l'email",
+            details: data.error.message || "Vérifiez votre configuration Resend"
+          },
+          { status: 500 }
+        );
+      }
+
+      console.log("✅ Email envoyé avec succès:", data);
+      return NextResponse.json({ success: true, data });
+    } catch (resendError: any) {
+      console.error("❌ Erreur lors de l'appel Resend:", resendError);
+      return NextResponse.json(
+        {
+          error: "Erreur lors de la communication avec le service d'email",
+          details: resendError.message || "Vérifiez votre clé API Resend"
+        },
+        { status: 500 }
+      );
     }
-
-    return NextResponse.json({ success: true, data });
 
   } catch (error) {
     console.error("Erreur API Contact:", error);
